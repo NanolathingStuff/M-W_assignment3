@@ -41,19 +41,21 @@ public class HomeFragment extends Fragment {
     private Sensor mSensorACC;
 
     // Step Detector sensor
+    private Sensor mSensorStepDetector;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // TODO 9: Initialize the TextView variable
+        // DONE 9: Initialize the TextView variable
         stepsCountTextView = (TextView) root.findViewById(R.id.stepsCount);
 
 
         // DONE 2: Get an instance of the sensor manager.
         mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         mSensorACC = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        mSensorStepDetector = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
         // instance of the sensor manager for the step detector
 
@@ -79,8 +81,12 @@ public class HomeFragment extends Fragment {
                         Toast.makeText(getContext(), R.string.acc_not_available, Toast.LENGTH_SHORT).show();
                     }
 
-                    // Check if the Step detector sensor exists
-
+                    // DONE Check if the Step detector sensor exists
+                    if(mSensorStepDetector != null){
+                        mSensorManager.registerListener(listener, mSensorStepDetector, SensorManager.SENSOR_DELAY_NORMAL);
+                    }else{
+                        Toast.makeText(getContext(), R.string.step_not_available, Toast.LENGTH_SHORT).show();
+                    }
 
 
                 } else if (group.getCheckedButtonId() == R.id.toggleStop) {
@@ -139,8 +145,7 @@ class StepCounterListener implements SensorEventListener {
             //////////////////////////// -- PRINT ACC VALUES -- ////////////////////////////////////
             // DONE 7: Uncomment the following code
 
-                /*get LOGCAT if phone moved (END TUTORIAL)
-                * it works slowly*/
+                /*get LOGCAT if phone moved*/
                 // Timestamp
                 long timeInMillis = System.currentTimeMillis() + (event.timestamp - SystemClock.elapsedRealtimeNanos()) / 1000000;
 
@@ -176,8 +181,14 @@ class StepCounterListener implements SensorEventListener {
             break;
 
             // case Step detector
+            case Sensor.TYPE_STEP_DETECTOR:
 
+                float steps = 0;
             // Calculate the number of steps
+                if (steps != (int) event.values[0]) { //steps from STEP_DETECTOR
+                    steps = (int) event.values[0];
+                    countSteps(steps);
+                }
 
         }
     }
@@ -235,7 +246,7 @@ class StepCounterListener implements SensorEventListener {
     // Calculate the number of steps from the step detector
     private void countSteps(float step) {
 
-
+            Log.d("STEPS", "Value: " + String.valueOf(step));
 
     }
 }

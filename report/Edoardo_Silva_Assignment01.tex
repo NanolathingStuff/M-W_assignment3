@@ -1,0 +1,79 @@
+\documentclass[11pt, english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} %utf8 % lettere accentate da tastiera
+\usepackage[english]{babel} % lingua del documento
+\usepackage{blindtext}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xcolor}   % for \textcolor
+\usepackage[font=small,labelfont=bf,skip=10pt]{caption}
+\usepackage{subcaption}
+\setlength{\belowcaptionskip}{5pt}
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+
+\title{Assignment01 \\ Mobile\&Wearable computing}
+
+\date{D.M.A.: 15/10/2020}
+
+\author{
+    \textsc{Edoardo Silva}
+}
+
+\begin{document}
+\maketitle
+
+\section*{Exercise1}
+
+\begin{figure}[H]
+  \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{ui\_add\_buttons.png}}
+  \caption{screenshot added icon left to buttons}
+  \label{fig:ui\_add\_buttons}
+\end{figure}
+
+
+\begin{lstlisting}[basicstyle=\small\ttfamily,caption=screenshot added icon left to buttons]
+{
+<com.google.android.material.button.MaterialButton,
+  ...,
+ android:drawableLeft="@drawable/ic\_toggle_start\_icon",
+ />
+ ...
+ <com.google.android.material.button.MaterialButton,
+ ...,
+  android:drawableLeft="@drawable/ic\_stop\_icon"/>
+}
+\end{lstlisting}
+
+\begin{figure}[H]
+  \makebox[\textwidth][c]{\includegraphics[width=1.3\linewidth]{u\i_change\_icon.png}}
+  \caption{screenshotchanged icon in manifest.xml}
+  \label{fig:ui\_change\_icon}
+\end{figure}
+
+\begin{lstlisting}[basicstyle=\small\ttfamily,caption=screenshot changed app icon]
+{
+  ...,
+	android:allowBackup="true"
+        android:icon="@mipmap/steps"
+        android:label="@string/app\_name"
+ ...,
+
+}
+\end{lstlisting}
+
+\newpage
+
+\section*{Exercise2}
+
+\end{document}
