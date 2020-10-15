@@ -177,18 +177,18 @@ class StepCounterListener implements SensorEventListener {
             // Calculate ACC peaks and steps
 
             peakDetection();
+            //countSteps(mACCStepCounter); it works
 
             break;
 
             // case Step detector
-            case Sensor.TYPE_STEP_DETECTOR:
+            case Sensor.TYPE_STEP_DETECTOR: //https://developer.android.com/reference/android/hardware/Sensor#TYPE_STEP_DETECTOR
+                //does not return anything?
 
-                float steps = 0;
             // Calculate the number of steps
-                if (steps != (int) event.values[0]) { //steps from STEP_DETECTOR
-                    steps = (int) event.values[0];
-                    countSteps(steps);
-                }
+                 //steps from STEP_DETECTOR
+                countSteps(mACCStepCounter);
+
 
         }
     }
