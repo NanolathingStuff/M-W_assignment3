@@ -57,9 +57,10 @@ public class HomeFragment extends Fragment {
 
         // instance of the sensor manager for the step detector
 
-        // TODO 11
+        // DONE 11
         // instantiate the StepCounterListener
-        listener = new StepCounterListener();
+        //listener = new StepCounterListener();
+        listener = new StepCounterListener(stepsCountTextView);
 
         // Toggle group button
         materialButtonToggleGroup = (MaterialButtonToggleGroup) root.findViewById(R.id.toggleButtonGroup);
@@ -116,8 +117,10 @@ class StepCounterListener implements SensorEventListener {
     // TextView
     TextView stepsCountTextView;
 
-    //TODO 10
-
+    //DONE 10
+    public StepCounterListener(TextView tv){
+        stepsCountTextView = tv;
+    }
 
 
     @Override
@@ -222,7 +225,8 @@ class StepCounterListener implements SensorEventListener {
                     mACCStepCounter += 1;
                     Log.d("ACC STEPS: ", String.valueOf(mACCStepCounter));
 
-                    //TODO 12: update the text view
+                    //DONE 12: update the text view
+                    stepsCountTextView.setText(String.valueOf(mACCStepCounter));
                 }
             }
         }
