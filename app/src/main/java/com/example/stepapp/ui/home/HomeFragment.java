@@ -36,8 +36,9 @@ public class HomeFragment extends Fragment {
 
     private SensorEventListener listener;
 
-    // TODO 1: ACC sensors.
-
+    // DONE 1: ACC sensors.
+    private SensorManager mSensorManager;
+    private Sensor mSensorACC;
 
     // Step Detector sensor
 
@@ -50,8 +51,9 @@ public class HomeFragment extends Fragment {
         stepsCountTextView = (TextView) root.findViewById(R.id.stepsCount);
 
 
-        // TODO 2: Get an instance of the sensor manager.
-
+        // DONE 2: Get an instance of the sensor manager.
+        mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        mSensorACC = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
 
         // instance of the sensor manager for the step detector
 
@@ -69,8 +71,12 @@ public class HomeFragment extends Fragment {
                     //Place code related to Start button
                     Toast.makeText(getContext(), "START", Toast.LENGTH_SHORT).show();
 
-                    // TODO 3: Check if the Accelerometer sensor exists
-
+                    // Done 3: Check if the Accelerometer sensor exists
+                    if(mSensorACC != null){
+                        mSensorManager.registerListener(listener, mSensorACC, SensorManager.SENSOR_DELAY_NORMAL);
+                    }else{
+                        Toast.makeText(getContext(), R.string.acc_not_available, Toast.LENGTH_SHORT).show();
+                    }
 
                     // Check if the Step detector sensor exists
 
@@ -80,7 +86,8 @@ public class HomeFragment extends Fragment {
                     //Place code related to Stop button
                     Toast.makeText(getContext(), "STOP", Toast.LENGTH_SHORT).show();
 
-                    // TODO 4: Unregister the listener
+                    // DONE 4: Unregister the listener
+                    mSensorManager.unregisterListener(listener); //unregister after use
                 }
             }
         });
@@ -118,16 +125,19 @@ class StepCounterListener implements SensorEventListener {
 
         switch (event.sensor.getType()) {
 
-            // TODO 5: Get the sensor type
+            // ALREADY 5: Get the sensor type
             case Sensor.TYPE_LINEAR_ACCELERATION:
 
-            // TODO 6: Get sensor's values
-
+            // DONE 6: Get sensor's values
+            float x = event.values[0]; //get axis value
+            float y = event.values[1];
+            float z = event.values[2];
 
             //////////////////////////// -- PRINT ACC VALUES -- ////////////////////////////////////
-            // TODO 7: Uncomment the following code
+            // DONE 7: Uncomment the following code
 
-                /*
+                /*get LOGCAT if phone moved (END TUTORIAL)
+                * it works slowly*/
                 // Timestamp
                 long timeInMillis = System.currentTimeMillis() + (event.timestamp - SystemClock.elapsedRealtimeNanos()) / 1000000;
 
@@ -145,7 +155,7 @@ class StepCounterListener implements SensorEventListener {
                             + String.valueOf(z) + " t: " + String.valueOf(date));
 
                 }
-                */
+
 
 
             ////////////////////////////////////////////////////////////////////////////////////////
