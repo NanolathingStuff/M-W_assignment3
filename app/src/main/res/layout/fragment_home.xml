@@ -80,14 +80,19 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/toggle_start"/>
+            android:text="@string/toggle_start"
+            android:drawableLeft="@drawable/ic_toggle_start_icon"
+            />
+        <!--android:src="@drawable/ic_toggle_start_icon"
+        android:contentDescription="@string/button_icon_desc"-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/toggleStop"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/toggle_stop" />
+            android:text="@string/toggle_stop"
+            android:drawableLeft="@drawable/ic_stop_icon"/>
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 

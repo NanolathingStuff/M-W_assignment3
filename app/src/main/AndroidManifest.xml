@@ -7,12 +7,13 @@
     <!-- Required for 29+. -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
 
-
+    <!--android:icon="@mipmap/ic_launcher"
+    android:roundIcon="@mipmap/ic_launcher_round"-->
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/steps"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/steps"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity

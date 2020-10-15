@@ -160,10 +160,10 @@ class StepCounterListener implements SensorEventListener {
 
             ////////////////////////////////////////////////////////////////////////////////////////
 
-            // TODO 8: Compute the ACC magnitude
-
+            // DONE 8: Compute the ACC magnitude
+            accMag = Math.sqrt(Math.pow(x, 2)+Math.pow(z, 2)+Math.pow(y, 2));
             //Update the Magnitude series
-
+            mACCSeries.add((int)accMag);
 
             /// STEP COUNTER ACC ////
             // Calculate ACC peaks and steps
